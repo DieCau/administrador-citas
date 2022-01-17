@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const Formulario = () => {
 
@@ -31,12 +32,14 @@ const Formulario = () => {
       // Validar
       if(mascota.trim() === '' || propietario.trim() === '' || fecha.trim() === '' || hora.trim() === '' || sintomas.trim() === '') {
         //Usando un 2do State actualizamos el valor de error  
-        setError(true)
+        setError(true);
           return;
       } 
+      // Eliminar el mensaje previo de error
+      setError(false);
 
       // Asignar un ID
-      
+      cita.id = uuidv4();
       
       // Crear la cita 
       
@@ -50,7 +53,7 @@ const Formulario = () => {
         <>
           <h2>Crear Cita</h2>
 
-          { error ? <p className='alert-error'>Todos los campos son obligatorios!</p>  : null}
+          { error ? <p className='alerta-error'>Todos los campos son obligatorios</p>  : null}
           
           <form
             onSubmit={submitCita} 

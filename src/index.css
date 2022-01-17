@@ -4,19 +4,17 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-  background: rgb(86, 107, 80);
+  background: #283048;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #4a5255, #283048);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #4a5255, #283048); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   min-height: 100%;
   padding-bottom: 5rem;
+  font-family: 'Maven Pro', sans-serif;
 }
 h1, h2  {
   color: white;
-  padding: 3rem 0;
+  padding: 2rem 0;
   text-align: center;
-
-  text-transform: uppercase;
-
-  font-family: 'Poppins', sans-serif;
   letter-spacing: 1px;
 }
 .lista-citas .media {
@@ -28,7 +26,7 @@ h1, h2  {
   border-bottom: 0;
 }
 .lista-citas .media-body p {
-  margin:0;
+  margin: 0;
 }
 .lista-citas .media-body button {
   margin-top: 1rem!important;
@@ -83,11 +81,9 @@ input[type="time"] {
 }
 
 .alerta-error {
-  background-color: white;
   color: red;
   padding: 1rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   text-align: center;
-  font-family:  'Staatliches', cursive;
 } 
