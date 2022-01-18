@@ -1,21 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import Formulario from "./components/Formulario";
 import Cita from "./components/Cita"
 
 function App() {
 
-  // Arreglo de citas
-  const [citas, setCitas] = useState([]);
+
+  // Citas en el Local Storage
+  // JSON.parse xq LS solo acepta strings y tengo un array
+  let citasIniciales = JSON.parse(localStorage.getItem('citas'));
+
+  // Si no hay citas iniciales, inicio citasIniciales con un array vacio 
+  if(!citasIniciales) {
+    citasIniciales = []
+  }
+
+  // Arreglo de citas. State inicial de citas = citasIniciales 
+  const [citas, setCitas] = useState(citasIniciales);
+
 
   // UseEffect para realizar ciertas operaciones cuando el state cambia
   useEffect(() => {
-    console.log('listo')
-  }, [])
+    
+    let citasIniciales = JSON.parse(localStorage.getItem('citas'));
+
+    // Si hay citasIniciales (en el State) entonces lo coloco en el LS
+    if(citasIniciales) {
+      localStorage.setItem('citas', JSON.stringify(citas))
+    }else {
+      // Si NO hay citasIniciales entonces coloco un array vacio en el LS 
+      localStorage.setItem('citas', JSON.stringify([]))
+    }
+  }, [citas])
+
 
   // Función que tome las citas actuales y agregue la nueva
   const crearCita = cita => {
     setCitas([...citas, cita ])
   }
+
 
 
   // Función que elimina una cita por su id
@@ -25,13 +47,15 @@ function App() {
     setCitas(nuevasCitas);
   }
 
+
   // Mensaje condicional
   const titulo = citas.length === 0 ? 'No hay citas' : 'Administra tus citas'
 
 
   return (
-    <>
+    <Fragment>
       <h1>ADMINISTRADOR DE PACIENTES</h1>
+      
       <div className="container">
         <div className="row">
           <div className="one-half column">
@@ -40,8 +64,8 @@ function App() {
               crearCita={ crearCita }
             />
           </div>
-          <div className="one-half-column">
-            <h2>{ titulo }</h2>
+          <div className="one-half column">
+            <h2>{titulo}</h2>
             {
               citas.map(cita =>(
                 <Cita 
@@ -54,7 +78,7 @@ function App() {
           </div>
         </div>
       </div>
-    </>
+    </Fragment>
   );
 }
 
